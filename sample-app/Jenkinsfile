@@ -85,7 +85,7 @@ spec:
       // Developer Branches
       when {
         not { branch 'master' }
-        not { branch 'canary' }
+        
       }
       steps {
         container('kubectl') {
