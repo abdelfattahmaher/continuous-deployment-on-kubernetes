@@ -63,12 +63,12 @@ spec:
     }
     
     stage('Lint') {
-			steps {
-				echo 'Linting..'
-				sh 'PATH=$PATH:$GOBIN golangci-lint run --modules-download-mode vendor --out-format checkstyle --issues-exit-code 0 > tests.lint.xml'
-				checkstyle pattern: 'tests.lint.xml', canComputeNew: false, unstableTotalHigh: '100'
-			}
-		}
+	    steps {
+		    echo 'Linting..'
+		    sh 'curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | bash -s -- -b $GOPATH/bin v1.12.5'
+		    sh 'golangci-lint run'
+	    }
+    }
     stage('Deploy Dev') {
       // Developer Branches
       when {
